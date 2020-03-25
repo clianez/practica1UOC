@@ -1,1 +1,1 @@
-# practica1UOC
+# Práctica1: Web scraping

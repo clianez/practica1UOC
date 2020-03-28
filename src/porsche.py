@@ -14,31 +14,7 @@ def filter_price(price_string):
     return price_text
 
 
-base_url = 'https://www.porsche.com'
-driver = webdriver.Chrome()
-driver.get(base_url + '/spain')
-menu_models = driver.find_element_by_id('m-01-models-menu-button')
-menu_models.click()
-branch_nodes = driver.find_elements_by_xpath('//h3/a')
-root_nodes = list(
-    map(lambda x: x.find_element_by_xpath('./../..'), branch_nodes))
-models_nodes = list(
-    map(lambda x: x.find_elements_by_xpath('./div/div[1]/div[2]'), root_nodes))
-models_nodes_flatten = list(chain(*models_nodes))
-manufacturer = ['porsche']*len(models_nodes_flatten)
-models = list(map(lambda x: x.find_element_by_xpath(
-    './div[1]').text, models_nodes_flatten))
-prices = list(map(lambda x: filter_price(x), models_nodes_flatten))
-urls = list(map(lambda x: x.find_element_by_xpath(
-    './..').get_attribute('href'), models_nodes_flatten))
-acelerations = list()
-max_speeds = list()
-powers = list()
-heights = list()
-
-for x in urls:
-    driver.get(base_url + x)
-    # get acel
+def get_acelerations():
     try:
         acel_node = driver.find_element_by_xpath(
             '//*[contains(text(),"Aceleración")]/preceding-sibling::*[1]')
@@ -47,7 +23,9 @@ for x in urls:
     except NoSuchElementException:
         acelerations.insert(len(acelerations), '-1')
         pass
-    # get speed
+
+
+def get_max_speeds():
     try:
         spd_node = driver.find_element_by_xpath(
             '//*[contains(text(),"Velocidad máxima")]/../*[contains(text(),"km/h")]')
@@ -69,7 +47,9 @@ for x in urls:
             print(base_url+x)
             max_speeds.insert(len(max_speeds), '-1')
             pass
-    # get power
+
+
+def get_powers():
     try:
         pwr_node = driver.find_element_by_xpath(
             '//*[contains(text(),"Potencia máxima") and contains(text(),"CV")]/../*[contains(text(),"kW")]')
@@ -92,7 +72,9 @@ for x in urls:
             print(base_url+x)
             powers.insert(len(powers), '-1')
             pass
-    # get height
+
+
+def get_heights():
     try:
         hght_node = driver.find_element_by_xpath(
             '//*[contains(text(),"Altura") and contains(text(),"mm")]')
@@ -134,3 +116,54 @@ for x in urls:
             pass
         pass
 
+
+def get_models_nodes_flatten():
+    branch_nodes = driver.find_elements_by_xpath('//h3/a')
+    root_nodes = list(
+        map(lambda x: x.find_element_by_xpath('./../..'), branch_nodes))
+    models_nodes = list(
+        map(lambda x: x.find_elements_by_xpath('./div/div[1]/div[2]'), root_nodes))
+    return list(chain(*models_nodes))
+
+
+def get_models(models_nodes_flatten):
+    return list(map(lambda x: x.find_element_by_xpath(
+        './div[1]').text, models_nodes_flatten))
+
+
+def get_prices(models_nodes_flatten):
+    return list(map(lambda x: filter_price(x), models_nodes_flatten))
+
+
+def get_urls(models_nodes_flatten):
+    return list(map(lambda x: x.find_element_by_xpath(
+        './..').get_attribute('href'), models_nodes_flatten))
+
+
+base_url = 'https://www.porsche.com'
+
+driver = webdriver.Chrome()
+driver.get(base_url + '/spain')
+menu_models = driver.find_element_by_id('m-01-models-menu-button')
+menu_models.click()
+models_nodes_flatten = get_models_nodes_flatten()
+manufacturer = ['porsche']*len(models_nodes_flatten)
+models = get_models(models_nodes_flatten)
+prices = get_prices(models_nodes_flatten)
+urls = get_urls(models_nodes_flatten)
+
+acelerations = list()
+max_speeds = list()
+powers = list()
+heights = list()
+lengths = list()
+
+for x in urls:
+    driver.get(base_url + x)
+    get_acelerations()
+    get_max_speeds()
+    get_powers()
+    get_heights()
+
+
+driver.close()

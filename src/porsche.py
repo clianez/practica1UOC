@@ -114,6 +114,48 @@ def get_heights():
         pass
 
 
+def get_lengths():
+    try:
+        lngth_node = driver.find_element_by_xpath(
+            '//*[contains(text(),"Longitud") and contains(text(),"mm")]')
+        lngth = lngth_node.get_attribute('innerHTML').replace(
+            'Longitud: ', '').replace('.', '').replace(' mm', '')
+        lengths.insert(len(lengths), lngth)
+    except NoSuchElementException:
+        try:
+            lngth_node = driver.find_element_by_xpath(
+                '//*[contains(text(),"Longitud")]/../*[contains(text(),"mm")]')
+            lngth = lngth_node.get_attribute(
+                'innerHTML').replace('.', '').replace(' mm', '')
+            lengths.insert(len(lengths), lngth)
+        except NoSuchElementException:
+            try:
+                lngth_node = driver.find_element_by_xpath(
+                    '//*[contains(text(),"Longitud")]/../../td/span[contains(text(),"mm")]')
+                lngth = lngth_node.get_attribute(
+                    'innerHTML').replace('.', '').replace(' mm', '')
+                lengths.insert(len(heights), lngth)
+            except NoSuchElementException:
+                try:
+                    driver.find_element_by_xpath(
+                        '//*[contains(text(),"Descubrir aspectos destacados")]').click()
+                    time.sleep(1)
+                    driver.find_element_by_xpath(
+                        '//*[contains(text(),"Carrocería")]').click()
+                    time.sleep(1)
+                    lngth_node = driver.find_element_by_xpath(
+                        '//*[contains(text(),"Longitud")]/../../td/span[contains(text(),"mm")]')
+                    lngth = lngth_node.get_attribute(
+                        'innerHTML').replace('.', '').replace(' mm', '')
+                    lengths.insert(len(lengths), lngth)
+                except NoSuchElementException:
+                    lengths.insert(len(lengths), '-1')
+                    pass
+                pass
+            pass
+        pass
+
+
 def get_models_nodes_flatten():
     branch_nodes = driver.find_elements_by_xpath('//h3/a')
     root_nodes = list(
@@ -161,6 +203,6 @@ for x in urls:
     get_max_speeds()
     get_powers()
     get_heights()
-
+    get_lengths()
 
 driver.close()

@@ -44,7 +44,6 @@ def get_max_speeds():
             spd = spd_node.get_attribute('innerHTML').replace(' km/h', '')
             max_speeds.insert(len(max_speeds), spd)
         except NoSuchElementException:
-            print(base_url+x)
             max_speeds.insert(len(max_speeds), '-1')
             pass
 
@@ -69,7 +68,6 @@ def get_powers():
             pwr = '-1' if pwr_filter is None else pwr_filter.group(1)
             powers.insert(len(powers), pwr)
         except NoSuchElementException:
-            print(base_url+x)
             powers.insert(len(powers), '-1')
             pass
 
@@ -109,7 +107,6 @@ def get_heights():
                         'innerHTML').replace('.', '').replace(' mm', '')
                     heights.insert(len(heights), hght)
                 except NoSuchElementException:
-                    print(base_url+x)
                     heights.insert(len(heights), '-1')
                     pass
                 pass

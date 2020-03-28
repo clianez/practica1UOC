@@ -156,6 +156,17 @@ def get_lengths():
         pass
 
 
+def get_consumption():
+    try:
+        cnsmp_nodes = driver.find_element_by_xpath(
+            '//*[contains(@class,"b-eco__value")]')
+        cnsmp = cnsmp_nodes.get_attribute('innerHTML').split(' ')[0]
+        consumptions.insert(len(consumptions), cnsmp)
+    except NoSuchElementException:
+        consumptions.insert(len(consumptions), '-1')
+        pass
+
+
 def get_models_nodes_flatten():
     branch_nodes = driver.find_elements_by_xpath('//h3/a')
     root_nodes = list(
@@ -196,6 +207,7 @@ max_speeds = list()
 powers = list()
 heights = list()
 lengths = list()
+consumptions = list()
 
 for x in urls:
     driver.get(base_url + x)
@@ -204,5 +216,6 @@ for x in urls:
     get_powers()
     get_heights()
     get_lengths()
+    get_consumption()
 
 driver.close()

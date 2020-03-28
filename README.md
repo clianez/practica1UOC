@@ -5,7 +5,7 @@ Se pretende la recolección de ciertos datos de dos páginas webs relacionadas c
 
 # Miembros del equipo
 
-La actividad ha sido realizada por Cristina Liánez López y ....
+La actividad ha sido realizada por Cristina Liánez López y Manuel Padrón Martínez.
 
 # Descripción del dataset
 
@@ -35,9 +35,8 @@ Este conjunto de datos es interesante analizarlo ya que .....
 
 
 
-
-
 # Recursos
 
 * Lawson, R. (2015). Web Scraping with Python. Packt Publishing Ltd. Chapter 2. Scraping the Data.
 * Mitchel, R. (2015). Web Scraping with Python: Collecting Data from the Modern Web. O'Reilly Media, Inc. Chapter 1. Your First Web Scraper.
+* Muthukadan, B (2018). Selenium with Python. https://selenium-python.readthedocs.io/

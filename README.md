@@ -11,8 +11,8 @@ La actividad ha sido realizada por Cristina Liánez López y ....
 
 El dataset recibe el nombre ......... y los datos que contiene son los siguientes:
 
-* Marca: se han analizado dos marcas Porsche y Lamborghini
-* Modelo: modelo de coche analizado dentro de las marcas anteriores
+* **Marca**: se han analizado dos marcas Porsche y Lamborghini
+* **Modelo**: modelo de coche analizado dentro de las marcas anteriores
 * altura: dimensiones en altura del vehículo desde el suelo
 * anchoBase: dimensiones en anchura del vehículo excluidos los espejos retrovisores
 * anchoTotal:  dimensiones en anchura del vehículo incluidos los espejos retrovisores

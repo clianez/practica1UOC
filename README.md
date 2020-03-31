@@ -9,7 +9,7 @@ La actividad ha sido realizada por Cristina Liánez López y Manuel Padrón Mart
 
 # Descripción del dataset
 
-El dataset recibe el nombre carsTecnicsFeatures y los datos que contiene son los siguientes:
+El dataset recibe el nombre de **carsTecnicsFeatures** y los datos que contiene son los siguientes:
 
 * **Marca**: se han analizado dos marcas Porsche y Lamborghini
 * **Modelo**: modelo de coche analizado dentro de las marcas anteriores

@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException, ElementNotInteractableException
 from itertools import chain
 import re
 import time
@@ -156,7 +156,48 @@ def get_lengths():
         pass
 
 
-def get_consumption():
+def get_weights():
+    try:
+        driver.find_element_by_xpath(
+            '//*[contains(text(),"Todas las especificaciones")]').click()
+        wghts_nodes = driver.find_element_by_xpath(
+            '//*[contains(text(),"Tara según DIN")]/../../td[2]/span')
+        wghts = wghts_nodes.get_attribute(
+            'innerHTML').replace('.', '').replace(' kg', '')
+        weights.insert(len(weights), wghts)
+    except NoSuchElementException:
+        try:
+            driver.find_element_by_xpath(
+                '//*[contains(text(),"Más información")]/../..').click()
+            wghts_nodes = driver.find_element_by_xpath(
+                '//*[contains(text(),"Tara según DIN")]/../p[2]')
+            wghts = wghts_nodes.get_attribute(
+                'innerHTML').replace('.', '').replace(' kg', '')
+            weights.insert(len(weights), wghts)
+        except (ElementNotInteractableException, NoSuchElementException, ElementClickInterceptedException) as e:
+            try:
+                driver.find_element_by_xpath(
+                    '//*[contains(text(),"Más información")]/..').click()
+                wghts_nodes = driver.find_element_by_xpath(
+                    '//*[contains(text(),"Tara según DIN")]/../p[2]')
+                wghts = wghts_nodes.get_attribute(
+                    'innerHTML').replace('.', '').replace(' kg', '')
+                weights.insert(len(weights), wghts)
+                pass
+            except (NoSuchElementException, ElementNotInteractableException) as e:
+                try:
+                    wghts_nodes = driver.find_element_by_xpath(
+                        '//*[contains(text(),"Tara según DIN")]/../p[2]')
+                    wghts = wghts_nodes.get_attribute(
+                        'innerHTML').replace('.', '').replace(' kg', '')
+                    weights.insert(len(weights), wghts)
+                    pass
+                except NoSuchElementException:
+                    weights.insert(len(weights), 'NA')
+                    pass
+
+
+def get_consumptions():
     try:
         cnsmp_nodes = driver.find_element_by_xpath(
             '//*[contains(@class,"b-eco__value")]')
@@ -207,15 +248,21 @@ max_speeds = list()
 powers = list()
 heights = list()
 lengths = list()
+weights = list()
 consumptions = list()
 
 for x in urls:
     driver.get(base_url + x)
+    print(base_url + x)
     get_acelerations()
     get_max_speeds()
     get_powers()
     get_heights()
     get_lengths()
-    get_consumption()
+    get_weights()
+    get_consumptions()
+    #tbd: get_widths()
+    #tbd: get_cylinder()
+
 
 driver.close()

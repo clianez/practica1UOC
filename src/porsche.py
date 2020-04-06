@@ -21,7 +21,7 @@ def get_acelerations():
         acel = acel_node.get_attribute('innerHTML').replace(' s', '')
         acelerations.insert(len(acelerations), acel)
     except NoSuchElementException:
-        acelerations.insert(len(acelerations), '-1')
+        acelerations.insert(len(acelerations), 'NA')
         pass
 
 
@@ -44,7 +44,7 @@ def get_max_speeds():
             spd = spd_node.get_attribute('innerHTML').replace(' km/h', '')
             max_speeds.insert(len(max_speeds), spd)
         except NoSuchElementException:
-            max_speeds.insert(len(max_speeds), '-1')
+            max_speeds.insert(len(max_speeds), 'NA')
             pass
 
 
@@ -54,7 +54,7 @@ def get_powers():
             '//*[contains(text(),"Potencia máxima") and contains(text(),"CV")]/../*[contains(text(),"kW")]')
         pwr_filter = re.search(
             '(\d*) CV', pwr_node.get_attribute('innerHTML'), re.IGNORECASE)
-        pwr = '-1' if pwr_filter is None else pwr_filter.group(1)
+        pwr = 'NA' if pwr_filter is None else pwr_filter.group(1)
         powers.insert(len(powers), pwr)
     except NoSuchElementException:
         try:
@@ -65,10 +65,10 @@ def get_powers():
                 '//*[contains(text(),"Potencia máxima") and contains(text(),"CV")]/../following-sibling::td/span[contains(text(),"CV")]')
             pwr_filter = re.search(
                 '(\d*) CV', pwr_node.get_attribute('innerHTML'), re.IGNORECASE)
-            pwr = '-1' if pwr_filter is None else pwr_filter.group(1)
+            pwr = 'NA' if pwr_filter is None else pwr_filter.group(1)
             powers.insert(len(powers), pwr)
         except NoSuchElementException:
-            powers.insert(len(powers), '-1')
+            powers.insert(len(powers), 'NA')
             pass
 
 
@@ -107,7 +107,7 @@ def get_heights():
                         'innerHTML').replace('.', '').replace(' mm', '')
                     heights.insert(len(heights), hght)
                 except NoSuchElementException:
-                    heights.insert(len(heights), '-1')
+                    heights.insert(len(heights), 'NA')
                     pass
                 pass
             pass
@@ -149,7 +149,7 @@ def get_lengths():
                         'innerHTML').replace('.', '').replace(' mm', '')
                     lengths.insert(len(lengths), lngth)
                 except NoSuchElementException:
-                    lengths.insert(len(lengths), '-1')
+                    lengths.insert(len(lengths), 'NA')
                     pass
                 pass
             pass
@@ -163,7 +163,7 @@ def get_consumption():
         cnsmp = cnsmp_nodes.get_attribute('innerHTML').split(' ')[0]
         consumptions.insert(len(consumptions), cnsmp)
     except NoSuchElementException:
-        consumptions.insert(len(consumptions), '-1')
+        consumptions.insert(len(consumptions), 'NA')
         pass
 
 

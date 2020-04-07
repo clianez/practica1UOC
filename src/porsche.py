@@ -65,6 +65,8 @@ def get_max_speeds():
 
 
 def get_powers():
+    pwr = ''
+
     try:
         # Buscamos la potencia del motor buscando un texto que contenga Potencia máxima y CV
         # Y que a su vez tenga un nodo tio que contenga kW
@@ -72,12 +74,6 @@ def get_powers():
         # en dos unidades
         pwr_node = driver.find_element_by_xpath(
             '//*[contains(text(),"Potencia máxima") and contains(text(),"CV")]/../*[contains(text(),"kW")]')
-        # Usamos una expresión regular para ignorar las otras unidades y limpiar la potencia en CV
-        pwr_filter = re.search(
-            '(\d*) CV', pwr_node.get_attribute('innerHTML'), re.IGNORECASE)
-        # Si la expresión recgular no es capaz de encontrar el valor agregamos un NA sino agregamos el valor
-        pwr = 'NA' if pwr_filter is None else pwr_filter.group(1)
-        powers.insert(len(powers), pwr)
     except NoSuchElementException:
         try:
             # En caso de no encontrarlo de la manera anterior probamos de otra manera.
@@ -89,15 +85,18 @@ def get_powers():
             # Buscamos la entrada de potencia en CV ya que dentro de este menu las opciones están separadas.
             pwr_node = driver.find_element_by_xpath(
                 '//*[contains(text(),"Potencia máxima") and contains(text(),"CV")]/../following-sibling::td/span[contains(text(),"CV")]')
-            # Aplicamos una expresión regular para limpiar y obtener el valor
-            pwr_filter = re.search(
-                '(\d*) CV', pwr_node.get_attribute('innerHTML'), re.IGNORECASE)
-            # Si la expresión recgular no es capaz de encontrar el valor agregamos un NA sino agregamos el valor
-            pwr = 'NA' if pwr_filter is None else pwr_filter.group(1)
-            powers.insert(len(powers), pwr)
         except NoSuchElementException:
-            powers.insert(len(powers), 'NA')
+            pwr = 'NA'
             pass
+
+    # y limpiamos las unidades
+    if pwr == '':
+        # Aplicamos una expresión regular para limpiar y obtener el valor
+        pwr_filter = re.search(
+            '(\d*) CV', pwr_node.get_attribute('innerHTML'), re.IGNORECASE)
+        # Si la expresión recgular no es capaz de encontrar el valor agregamos un NA sino agregamos el valor
+        pwr = 'NA' if pwr_filter is None else pwr_filter.group(1)
+    powers.insert(len(powers), pwr)
 
 
 def get_dimensions(text, dimArray):

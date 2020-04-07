@@ -100,34 +100,25 @@ def get_powers():
             pass
 
 
-def get_heights():
+def get_dimensions(text, dimArray):
+    # Iniciailzamos el valor a vacio
+    value = ''
+
     try:
-        # La altura hay varias formas de obtenerla.
-        # Buscando Altura directamente que debe de incluir la altura en el mismo nodo
-        hght_node = driver.find_element_by_xpath(
-            '//*[contains(text(),"Altura") and contains(text(),"mm")]')
-        # Y limpiando las unidades
-        hght = hght_node.get_attribute('innerHTML').replace(
-            'Altura: ', '').replace('.', '').replace(' mm', '')
-        heights.insert(len(heights), hght)
+        # Las dimensiones hay varias formas de obtenerlas.
+        # Buscando el texto directamente que debe de incluir el valor en el mismo nodo
+        node = driver.find_element_by_xpath(
+            '//*[contains(text(),"' + text + '") and contains(text(),"mm")]')
     except NoSuchElementException:
         try:
-            # Teniendo la altura separada del nodo del texto "Altura"
-            hght_node = driver.find_element_by_xpath(
-                '//*[contains(text(),"Altura")]/../*[contains(text(),"mm")]')
-            # y limpiamos las unidades
-            hght = hght_node.get_attribute(
-                'innerHTML').replace('.', '').replace(' mm', '')
-            heights.insert(len(heights), hght)
+            # Teniendo el valor separado del nodo del texto
+            node = driver.find_element_by_xpath(
+                '//*[contains(text(),"' + text + '")]/../*[contains(text(),"mm")]')
         except NoSuchElementException:
             try:
-                # Teniendo la altura separada del nodo del texto "Altura" pero estando en una tabla
-                hght_node = driver.find_element_by_xpath(
-                    '//*[contains(text(),"Altura")]/../../td/span[contains(text(),"mm")]')
-                # Y limpiamos las unidades
-                hght = hght_node.get_attribute(
-                    'innerHTML').replace('.', '').replace(' mm', '')
-                heights.insert(len(heights), hght)
+                # Teniendo el valor separado del nodo del texto pero estando en una tabla
+                node = driver.find_element_by_xpath(
+                    '//*[contains(text(),"' + text + '")]/../../td/span[contains(text(),"mm")]')
             except NoSuchElementException:
                 try:
                     # O desplegando descubrir aspectos destacados
@@ -140,74 +131,21 @@ def get_heights():
                         '//*[contains(text(),"Carrocería")]').click()
                     # Volvemos a esperar por el JS
                     time.sleep(1)
-                    # Y ahora buscamos la altura separada del nodo que contiene la etiqueta
-                    hght_node = driver.find_element_by_xpath(
-                        '//*[contains(text(),"Altura")]/../../td/span[contains(text(),"mm")]')
-                    # Y limpiamos las unidades
-                    hght = hght_node.get_attribute(
-                        'innerHTML').replace('.', '').replace(' mm', '')
-                    heights.insert(len(heights), hght)
+                    # Y ahora buscamos el valor separada del nodo que contiene el texto
+                    node = driver.find_element_by_xpath(
+                        '//*[contains(text(),"' + text + '")]/../../td/span[contains(text(),"mm")]')
                 except NoSuchElementException:
-                    heights.insert(len(heights), 'NA')
+                    value = 'NA'
                     pass
                 pass
             pass
         pass
 
-
-def get_lengths():
-    try:
-        # La longitud también tenemos 4 maneras de obtenerla
-        # O en el titular donde se incluyen la longitud y el valor juntos
-        lngth_node = driver.find_element_by_xpath(
-            '//*[contains(text(),"Longitud") and contains(text(),"mm")]')
-        # Y limpiamos las unidades
-        lngth = lngth_node.get_attribute('innerHTML').replace(
-            'Longitud: ', '').replace('.', '').replace(' mm', '')
-        lengths.insert(len(lengths), lngth)
-    except NoSuchElementException:
-        try:
-            # Teniendo la longitud separada del nodo del texto "Longitud"
-            lngth_node = driver.find_element_by_xpath(
-                '//*[contains(text(),"Longitud")]/../*[contains(text(),"mm")]')
-            # Y limpiamos las unidades
-            lngth = lngth_node.get_attribute(
-                'innerHTML').replace('.', '').replace(' mm', '')
-            lengths.insert(len(lengths), lngth)
-        except NoSuchElementException:
-            try:
-                # Teniendo la longitud separada del nodo del texto "Lonngitud" pero estando en una tabla
-                lngth_node = driver.find_element_by_xpath(
-                    '//*[contains(text(),"Longitud")]/../../td/span[contains(text(),"mm")]')
-                # Y limpiamos las unidades
-                lngth = lngth_node.get_attribute(
-                    'innerHTML').replace('.', '').replace(' mm', '')
-                lengths.insert(len(heights), lngth)
-            except NoSuchElementException:
-                try:
-                    # Picamos en Descubrir aspectos destacados
-                    driver.find_element_by_xpath(
-                        '//*[contains(text(),"Descubrir aspectos destacados")]').click()
-                    # Esperamos por la animación JS
-                    time.sleep(1)
-                    # Picamos en carrocería
-                    driver.find_element_by_xpath(
-                        '//*[contains(text(),"Carrocería")]').click()
-                    # Esperamos por la animación JS
-                    time.sleep(1)
-                    # Obtenemos la longitud separada del nodo que contiene la etiqueta
-                    lngth_node = driver.find_element_by_xpath(
-                        '//*[contains(text(),"Longitud")]/../../td/span[contains(text(),"mm")]')
-                    # Y limpiamos las unidades
-                    lngth = lngth_node.get_attribute(
-                        'innerHTML').replace('.', '').replace(' mm', '')
-                    lengths.insert(len(lengths), lngth)
-                except NoSuchElementException:
-                    lengths.insert(len(lengths), 'NA')
-                    pass
-                pass
-            pass
-        pass
+    # y limpiamos las unidades
+    if value == '':
+        value = node.get_attribute(
+            'innerHTML').replace(text + ': ', '').replace('.', '').replace(' mm', '')
+    dimArray.insert(len(dimArray), value)
 
 
 def get_weights():
@@ -357,9 +295,9 @@ for x in urls:
     # La potencia
     get_powers()
     # La altura
-    get_heights()
+    get_dimensions('Altura', heights)
     # La longitud
-    get_lengths()
+    get_dimensions('Longitud', lengths)
     # El peso
     get_weights()
     # El consumo

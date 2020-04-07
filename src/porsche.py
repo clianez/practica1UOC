@@ -226,6 +226,48 @@ def get_consumptions(url):
     consumptions.insert(len(consumptions), cnsmp)
 
 
+def get_cylinder(url):
+    clndr = ''
+
+    # Cargamos la página principal del subtipo
+    driver.get(url)
+
+    # Obtenemos el peso del coche, dependiendo del modelo está en un sitio u otro.
+    try:
+        # Si tiene accesible un enlace con Todas las especificaciones o Descubrir aspectos destacados lo desplegamos
+        driver.find_element_by_xpath(
+            '//*[contains(text(),"Descubrir aspectos destacados") or contains(text(),"Todas las especificaciones")]').click()
+        # Buscamos el elemento que contenga Cilindrada y a partir de ese buscamos el elemento con el valor
+        clndr_nodes = driver.find_element_by_xpath(
+            '//*[contains(text(),"Cilindrada")]/../../td[2]/span')
+    except NoSuchElementException:
+        try:
+            # Picamos en más información
+            driver.find_element_by_xpath(
+                '//*/a/span[contains(text(),"Más información")]').click()
+            # Buscamos el elemento que contenga cm³
+            clndr_nodes = driver.find_element_by_xpath(
+                '//*[contains(text(),"cm³")]')
+        except NoSuchElementException:
+            try:
+                # Buscamos directamente un elemento que incluya cm³
+                clndr_nodes = driver.find_element_by_xpath(
+                    '//*[contains(text(),"cm³")]')
+            except NoSuchElementException:
+                # En este punto, trás intentarlo de tres maneras diferentes,
+                # entendemos que no se puede obtener y ponemos un NA
+                clndr = 'NA'
+                pass
+            pass
+        pass
+
+    # Limpiamos los valores, quitamos los puntos y las unidades para quedarnos con el valor númerico
+    if clndr == '':
+        clndr = clndr_nodes.get_attribute(
+            'innerHTML').replace('.', '').replace(' cm³', '')
+    cylinders.insert(len(cylinders), clndr)
+
+
 def get_models_nodes_flatten():
     # Obtenemos los nodos de cada uno de los subtipos de coches
     # Buscamos primero el nodo del tipo de coche
@@ -288,6 +330,7 @@ widthsB = list()
 widthsT = list()
 weights = list()
 consumptions = list()
+cylinders = list()
 
 # Iteramos por todas las urls
 for x in urls:
@@ -312,7 +355,8 @@ for x in urls:
     get_weights(base_url + x)
     # El consumo
     get_consumptions(base_url + x)
-    #tbd: get_cylinder()
+    # La cilindrada
+    get_cylinder(base_url + x)
 
 
 driver.close()

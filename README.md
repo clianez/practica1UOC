@@ -28,9 +28,9 @@ El dataset recibe el nombre de **carsTecnicsFeatures** y los datos que contiene 
 
 # Ficheros del código fuente
 
-* src/main.py: punto de entrada al programa. Inicia el proceso de scraping.
-* src/scraper.py: contiene la implementación de la clase AccidentsScraper cuyos métodos generan el conjunto de datos a partir de la base de datos online PlaneCrashInfo.
-* src/reason_classifier.py: contiene la implementación de la clase que se encarga de asignar una causa a un resumen de accidente dado. Para ello, utiliza la librería TextBlob.
+* **src/main.py**: punto de entrada al programa. Creación del dataset.
+* **src/porsche.py**: realiza scraping en la página de Porsche.
+* **src/scrapingLambo.py**: realiza scraping en la página de Lamborghini.
 
 
 # Recursos

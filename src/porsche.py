@@ -149,6 +149,8 @@ def get_dimensions(text, dimArray):
 
 
 def get_weights():
+    wghts = ''
+
     # Obtenemos el peso del coche, dependiendo del modelo está en un sitio u otro.
     try:
         # Si tiene accesible un enlace con Todas las especificaciones lo desplegamos
@@ -157,10 +159,6 @@ def get_weights():
         # Obtenemos la Tara según DIN
         wghts_nodes = driver.find_element_by_xpath(
             '//*[contains(text(),"Tara según DIN")]/../../td[2]/span')
-        # Limpiamos los valores, quitamos los puntos y las unidades para quedarnos con el valor númerico
-        wghts = wghts_nodes.get_attribute(
-            'innerHTML').replace('.', '').replace(' kg', '')
-        weights.insert(len(weights), wghts)
     except NoSuchElementException:
         try:
             # Lo buscamos picando en el abuelo de más información
@@ -169,10 +167,6 @@ def get_weights():
             # Obtenemos el valor
             wghts_nodes = driver.find_element_by_xpath(
                 '//*[contains(text(),"Tara según DIN")]/../p[2]')
-            # Lo limpiamos
-            wghts = wghts_nodes.get_attribute(
-                'innerHTML').replace('.', '').replace(' kg', '')
-            weights.insert(len(weights), wghts)
         except (ElementNotInteractableException, NoSuchElementException, ElementClickInterceptedException) as e:
             try:
                 # En caso de que no se encuentre (NoSunchElementException)
@@ -184,11 +178,6 @@ def get_weights():
                 # Obtenemos el valor
                 wghts_nodes = driver.find_element_by_xpath(
                     '//*[contains(text(),"Tara según DIN")]/../p[2]')
-                # Lo limpiamos
-                wghts = wghts_nodes.get_attribute(
-                    'innerHTML').replace('.', '').replace(' kg', '')
-                weights.insert(len(weights), wghts)
-                pass
             except (NoSuchElementException, ElementNotInteractableException) as e:
                 try:
                     # En caso de que no se encuentre (NoSunchElementException)
@@ -197,16 +186,17 @@ def get_weights():
                     # Buscamos directamente el peso
                     wghts_nodes = driver.find_element_by_xpath(
                         '//*[contains(text(),"Tara según DIN")]/../p[2]')
-                    # Y lo limpiamos
-                    wghts = wghts_nodes.get_attribute(
-                        'innerHTML').replace('.', '').replace(' kg', '')
-                    weights.insert(len(weights), wghts)
-                    pass
                 except NoSuchElementException:
                     # En este punto, trás intentarlo de cuatro maneras diferentes,
                     # entendemos que no se puede obtener y ponemos un NA
-                    weights.insert(len(weights), 'NA')
+                    wghts = 'NA'
                     pass
+
+    # Limpiamos los valores, quitamos los puntos y las unidades para quedarnos con el valor númerico
+    if wghts == '':
+        wghts = wghts_nodes.get_attribute(
+            'innerHTML').replace('.', '').replace(' kg', '')
+    weights.insert(len(weights), wghts)
 
 
 def get_consumptions():

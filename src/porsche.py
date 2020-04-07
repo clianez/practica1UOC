@@ -206,8 +206,11 @@ def get_weights(url):
     weights.insert(len(weights), wghts)
 
 
-def get_consumptions():
+def get_consumptions(url):
     cnsmp = ''
+
+    # Cargamos la página principal del subtipo
+    driver.get(url)
 
     # Obtenemos el consumo que está en un elemento que tiene la clase b-eco__value
     try:
@@ -308,8 +311,7 @@ for x in urls:
     # El peso
     get_weights(base_url + x)
     # El consumo
-    get_consumptions()
-    #tbd: get_widths()
+    get_consumptions(base_url + x)
     #tbd: get_cylinder()
 
 

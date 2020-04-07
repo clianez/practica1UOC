@@ -153,14 +153,17 @@ def get_dimensions(text, dimArray, url):
     dimArray.insert(len(dimArray), value)
 
 
-def get_weights():
+def get_weights(url):
     wghts = ''
+
+    # Cargamos la página principal del subtipo
+    driver.get(url)
 
     # Obtenemos el peso del coche, dependiendo del modelo está en un sitio u otro.
     try:
-        # Si tiene accesible un enlace con Todas las especificaciones lo desplegamos
+        # Si tiene accesible un enlace con Todas las especificaciones o Descubrir aspectos destacados lo desplegamos
         driver.find_element_by_xpath(
-            '//*[contains(text(),"Todas las especificaciones")]').click()
+            '//*[contains(text(),"Descubrir aspectos destacados") or contains(text(),"Todas las especificaciones")]').click()
         # Obtenemos la Tara según DIN
         wghts_nodes = driver.find_element_by_xpath(
             '//*[contains(text(),"Tara según DIN")]/../../td[2]/span')
@@ -303,7 +306,7 @@ for x in urls:
     get_dimensions('Anchura (con retrovisores extendidos)',
                    widthsT, base_url + x)
     # El peso
-    get_weights()
+    get_weights(base_url + x)
     # El consumo
     get_consumptions()
     #tbd: get_widths()

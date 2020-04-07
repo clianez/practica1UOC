@@ -278,10 +278,11 @@ def get_consumptions():
             '//*[contains(@class,"b-eco__value")]')
         # Cogemos el primer elemento para eliminar las unidades
         cnsmp = cnsmp_nodes.get_attribute('innerHTML').split(' ')[0]
-        consumptions.insert(len(consumptions), cnsmp)
     except NoSuchElementException:
-        consumptions.insert(len(consumptions), 'NA')
+        cnsmp = 'NA'
         pass
+    finally:
+        consumptions.insert(len(consumptions), cnsmp)
 
 
 def get_models_nodes_flatten():

@@ -182,7 +182,6 @@ def get_weights():
                 try:
                     # En caso de que no se encuentre (NoSunchElementException)
                     # o el elemento no sea picable (ElementNotInteractableException)
-                    # Buscamos el enlace de "Más información" en el padre del nodo
                     # Buscamos directamente el peso
                     wghts_nodes = driver.find_element_by_xpath(
                         '//*[contains(text(),"Tara según DIN")]/../p[2]')

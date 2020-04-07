@@ -99,7 +99,7 @@ def get_powers():
     powers.insert(len(powers), pwr)
 
 
-def get_dimensions(text, dimArray):
+def get_dimensions(text, dimArray, url):
     # Iniciailzamos el valor a vacio
     value = ''
 
@@ -122,12 +122,18 @@ def get_dimensions(text, dimArray):
                 try:
                     # O desplegando descubrir aspectos destacados
                     driver.find_element_by_xpath(
-                        '//*[contains(text(),"Descubrir aspectos destacados")]').click()
+                        '//*[contains(text(),"Descubrir aspectos destacados") or contains(text(),"Todas las especificaciones")]').click()
                     # Esperamos po la animación en JS
                     time.sleep(1)
                     # Desplegamos carrocería
-                    driver.find_element_by_xpath(
-                        '//*[contains(text(),"Carrocería")]').click()
+                    try:
+                        driver.find_element_by_xpath(
+                            '//*[contains(text(),"Carrocería")]').click()
+                    except ElementClickInterceptedException:
+                        # Hay páginas en las que el elemento picable es el padre
+                        driver.find_element_by_xpath(
+                            '//*[contains(text(),"Carrocería")]/..').click()
+                        pass
                     # Volvemos a esperar por el JS
                     time.sleep(1)
                     # Y ahora buscamos el valor separada del nodo que contiene el texto
@@ -272,6 +278,8 @@ max_speeds = list()
 powers = list()
 heights = list()
 lengths = list()
+widthsB = list()
+widthsT = list()
 weights = list()
 consumptions = list()
 
@@ -286,9 +294,14 @@ for x in urls:
     # La potencia
     get_powers()
     # La altura
-    get_dimensions('Altura', heights)
+    get_dimensions('Altura', heights, base_url + x)
     # La longitud
-    get_dimensions('Longitud', lengths)
+    get_dimensions('Longitud', lengths, base_url + x)
+    # La anchura
+    get_dimensions('Anchura (con retrovisores abatidos)',
+                   widthsB, base_url + x)
+    get_dimensions('Anchura (con retrovisores extendidos)',
+                   widthsT, base_url + x)
     # El peso
     get_weights()
     # El consumo

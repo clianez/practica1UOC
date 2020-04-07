@@ -25,14 +25,12 @@ El dataset recibe el nombre de **carsTecnicsFeatures** y los datos que contiene 
 * **velocidadMax**: velocidad máxima que puede alcanzar en km/h
 * **precio**: precio base o desde
 
-Este conjunto de datos es interesante analizarlo ya que .....
-# Agradecimientos
-
-# Licencia
 
 # Ficheros del código fuente
 
-
+* src/main.py: punto de entrada al programa. Inicia el proceso de scraping.
+* src/scraper.py: contiene la implementación de la clase AccidentsScraper cuyos métodos generan el conjunto de datos a partir de la base de datos online PlaneCrashInfo.
+* src/reason_classifier.py: contiene la implementación de la clase que se encarga de asignar una causa a un resumen de accidente dado. Para ello, utiliza la librería TextBlob.
 
 
 # Recursos

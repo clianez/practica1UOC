@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -299,64 +300,85 @@ def get_urls(models_nodes_flatten):
         './..').get_attribute('href'), models_nodes_flatten))
 
 
-base_url = 'https://www.porsche.com'
+def scrappingPorsche():
+    base_url = 'https://www.porsche.com'
 
-driver = webdriver.Chrome()
-# Cargamos la página en español
-driver.get(base_url + '/spain')
-# Obtenemos el enlace de los modelos
-menu_models = driver.find_element_by_id('m-01-models-menu-button')
-# Picamos en él
-menu_models.click()
-# Obtenemos todos los modelos. Flatten es porque hay tipos de coches y subtipos.
-# Por ejemplo el 911 tiene 911 carrera y 911 turbo, así que obtenemos los nodos de
-# los subtipos
-models_nodes_flatten = get_models_nodes_flatten()
-# Rellenamos un vector con el nombre del fabricante
-manufacturer = ['porsche']*len(models_nodes_flatten)
-# Obtenemos los modelos a partir de los nodos de los modelos
-models = get_models(models_nodes_flatten)
-# Obtenemos los precios a partir de los nodos de los modelos
-prices = get_prices(models_nodes_flatten)
-# Obtenemos las urls de cada submodelo
-urls = get_urls(models_nodes_flatten)
+    driver = webdriver.Chrome()
+    # Cargamos la página en español
+    driver.get(base_url + '/spain')
+    # Obtenemos el enlace de los modelos
+    menu_models = driver.find_element_by_id('m-01-models-menu-button')
+    # Picamos en él
+    menu_models.click()
+    # Obtenemos todos los modelos. Flatten es porque hay tipos de coches y subtipos.
+    # Por ejemplo el 911 tiene 911 carrera y 911 turbo, así que obtenemos los nodos de
+    # los subtipos
+    models_nodes_flatten = get_models_nodes_flatten()
+    # Rellenamos un vector con el nombre del fabricante
+    manufacturer = ['porsche']*len(models_nodes_flatten)
+    # Obtenemos los modelos a partir de los nodos de los modelos
+    models = get_models(models_nodes_flatten)
+    # Obtenemos los precios a partir de los nodos de los modelos
+    prices = get_prices(models_nodes_flatten)
+    # Obtenemos las urls de cada submodelo
+    urls = get_urls(models_nodes_flatten)
 
-acelerations = list()
-max_speeds = list()
-powers = list()
-heights = list()
-lengths = list()
-widthsB = list()
-widthsT = list()
-weights = list()
-consumptions = list()
-cylinders = list()
+    acelerations = list()
+    max_speeds = list()
+    powers = list()
+    heights = list()
+    lengths = list()
+    widthsB = list()
+    widthsT = list()
+    weights = list()
+    consumptions = list()
+    cylinders = list()
 
-# Iteramos por todas las urls
-for x in urls:
-    driver.get(base_url + x)
-    print(base_url + x)
-    # Añadimos la aceleración del modelo actual
-    get_acelerations()
-    # La velocidad máxima
-    get_max_speeds()
-    # La potencia
-    get_powers()
-    # La altura
-    get_dimensions('Altura', heights, base_url + x)
-    # La longitud
-    get_dimensions('Longitud', lengths, base_url + x)
-    # La anchura
-    get_dimensions('Anchura (con retrovisores abatidos)',
-                   widthsB, base_url + x)
-    get_dimensions('Anchura (con retrovisores extendidos)',
-                   widthsT, base_url + x)
-    # El peso
-    get_weights(base_url + x)
-    # El consumo
-    get_consumptions(base_url + x)
-    # La cilindrada
-    get_cylinder(base_url + x)
+    # Iteramos por todas las urls
+    for x in urls:
+        driver.get(base_url + x)
+        print(base_url + x)
+        # Añadimos la aceleración del modelo actual
+        get_acelerations()
+        # La velocidad máxima
+        get_max_speeds()
+        # La potencia
+        get_powers()
+        # La altura
+        get_dimensions('Altura', heights, base_url + x)
+        # La longitud
+        get_dimensions('Longitud', lengths, base_url + x)
+        # La anchura
+        get_dimensions('Anchura (con retrovisores abatidos)',
+                       widthsB, base_url + x)
+        get_dimensions('Anchura (con retrovisores extendidos)',
+                       widthsT, base_url + x)
+        # El peso
+        get_weights(base_url + x)
+        # El consumo
+        get_consumptions(base_url + x)
+        # La cilindrada
+        get_cylinder(base_url + x)
 
+    driver.close()
 
-driver.close()
+    matrix = [
+        manufacturer,
+        models,
+        heights,
+        widthsB,
+        widthsT,
+        lengths,
+        weights,
+        cylinders,
+        consumptions,
+        powers,
+        acelerations,
+        max_speeds,
+        prices
+    ]
+    # Trasponemos las filas en columnas
+
+    matrixT = [list(i) for i in zip(*matrix)]
+    print(matrixT)
+    return matrix

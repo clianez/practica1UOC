@@ -173,4 +173,3 @@ def scrapingLambo():
     return matrizDatosT
 
 
-scrapingLambo()

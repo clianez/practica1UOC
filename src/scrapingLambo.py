@@ -4,16 +4,31 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 from itertools import chain
 from selenium.webdriver.common.action_chains import ActionChains
+import urllib.robotparser
 
 
 def scrapingLambo():
-    #accedo a la página 
+
     urlBase = "https://www.lamborghini.com/es-en/"
+        
+    # Leemos el robots.txt para verificar que se puede acceder a las urls
+    rp = urllib.robotparser.RobotFileParser()
+    rp.set_url(urlBase + '/robots.txt')
+    rp.read()
+
     driver = webdriver.Chrome()
-    driver.get(urlBase)
-    driver.find_element_by_xpath("/html/body/div/header/nav/ul[1]/li[1]/a/span").click()
+    driver.maximize_window()
+    #accedo a la página en caso de que esté permitida por el robots
+    if rp.can_fetch("*", urlBase):
+        driver.get(urlBase)
+    else:
+        exit()
+
+   
+   
 
     #otengo modelos
+    driver.find_element_by_xpath("/html/body/div/header/nav/ul[1]/li[1]/a/span").click()
     modelos = list(map(lambda x: x.get_attribute('innerHTML'), driver.find_elements_by_xpath("//*[@data-item='left-0']/*[@class='lev-3']/li/a/span")))
 
     #urls para acceder a la página con las características de cada modelo
@@ -147,7 +162,7 @@ def scrapingLambo():
         pesos,
         cilindradas,
         consumos,
-        potencia,
+        potencias,
         aceleracionS,
         velocidadesMax,
         precio
@@ -158,3 +173,4 @@ def scrapingLambo():
     return matrizDatosT
 
 
+scrapingLambo()

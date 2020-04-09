@@ -1,0 +1,73 @@
+marca,modelo,altura,anchoBase,anchoTotal,longitud,peso,cilindrada,consumo,potencia,aceleracion,velocidadMax,precio
+Lamborghini,AVENTADOR S,1.136 mm (44.72 in),2.030 mm (79.92 in),2.265 mm (89.17 in),4.797 mm (188.86 in),"1.575 kg (3,472 lb)",6.498 cm³ (396.5 cu in),"18,4 l/100km",6,"2,9 s",350 km/h (217 mph),NA
+Lamborghini,AVENTADOR S ROADSTER,1.136 mm (44.72 in),2.030 mm (79.92 in),2.265 mm (89.17 in),4.797 mm (188.86 in),"1.625 kg (3,583 lb)",6.498 cm³ (396.5 cu in),"18,4 l/100km",5,"3,0 s",350 km/h (217 mph),NA
+Lamborghini,AVENTADOR SVJ,1136 mm,2098 mm,2273 mm,4943 mm,1525 kg (3362 lb),6498 cc,"17,9 l/100km",0,"2,8 s",&gt;350 km/h,NA
+Lamborghini,AVENTADOR SVJ ROADSTER,"1,136 mm (44.72 in)","2,098 mm (82.60 in)","2,273 mm (89.49 in)","4,943 mm (194.61 in)","1,575 kg","6,498 cm³","17,9 l/100km", ,2.9 s,&gt;350 km/h,NA
+Lamborghini,Huracán EVO,"mm 1,165 (in 45,86)","mm 1,933 (in 76,10)","mm 2,236 (in 88,03)","mm 4,52 (in 177,9)",kg 1.422 (lb 3.134),5.204 cm3 (317.57 cu in),"13,7, l/100km",C,2.9 s,km/h &gt;325 (mph &gt; 202),NA
+Lamborghini,HURACÁN EVO SPYDER,"1,180 mm (46.46 in)","1,933 mm (76.10 in)","2,236 mm (88.03 in)","4,520 mm (177.95 in)","1,668 mm (65.67 in)","5204 cm³ (317,6 pulgadas cúbicas)",14.2 l/100 km,V,3.1 s,325 km/h (202 mph),NA
+Lamborghini,Huracán EVO RWD,"1,165 mm (45.86 in)","1,933 mm (76.10 in)","2,236 mm (88.03 in)","4,520 mm (177.9 in)",1389 kg,"5,204 cm³ (317.57 cu in)","13,8 l/100 km", ,3.3 s,325 km/h,NA
+Lamborghini,Sián FKP 37,NA,NA,NA,NA,NA,"6.498 cm³ (396,5 pulgadas cúbicas)",NA,(,NA,819 CV,NA
+Lamborghini,Centenario Roadster,NA,NA,NA,NA,NA,6.498 cm³ (396.5 cu in),NA,4,"2,9 s",&gt; 350 km/h (&gt; 217 mph),NA
+Lamborghini,Centenario,NA,NA,NA,NA,NA,6.498 cm³ (396.5 cu in),NA,7,"2,8 s",&gt; 350 km/h (&gt; 217 mph),NA
+Lamborghini,Terzo Millennio,NA,NA,NA,NA,NA,NA,NA,8,NA,NA,NA
+Lamborghini,Asterion,NA,NA,NA,NA,NA,"5.204 cm³ (317,6 cu.in.) - motor de combustión interna","4,1 l/100 km", ,NA,NA,NA
+Lamborghini,Estoque,NA,NA,NA,NA,NA,NA,NA,k,NA,NA,NA
+Lamborghini,URUS,NA,NA,NA,NA,NA,"3,996 cm3 (243.85 cu in)",NA,W,3.6 s,305 km/h ,NA
+porsche,718 Cayman,1295,1801,1994,4379,1335,1988,"9,0",300,"5,3",275,"62.103,00"
+porsche,718 Cayman S,1295,1801,1994,4379,1355,2497,"9,7",350,"4,9",285,"78.698,00"
+porsche,718 Boxster,1281,1801,1994,4379,1335,1988,"9,0",300,"5,3",275,"64.326,00"
+porsche,718 Boxster S,1280,1801,1994,4379,1355,2497,"9,7",350,"4,9",285,"81.005,00"
+porsche,718 Cayman T,1276,1801,1994,4379,1350,1988,"9,0",300,"5,1",275,"71.909,00"
+porsche,718 Boxster T,1264,1801,1994,4379,1350,1988,"9,0",300,"5,3",275,"74.132,00"
+porsche,718 Cayman GTS 4.0,1276,NA,NA,NA,1405,3995,"10,9",400,"4,5",293,"94.580,00"
+porsche,718 Boxster GTS 4.0,1262,NA,NA,NA,1405,3995,"10,9",400,"4,5",293,"96.888,00"
+porsche,718 Cayman GT4,1269,1801,1994,4456,1420,3995,"11,0",420,"4,4",304,"110.870,00"
+porsche,718 Spyder,1258,1801,1994,4430,1420,3995,"11,0",420,"4,4",301,"107.612,00"
+porsche,911 Carrera,1298,1852,2024,4519,1505,2981,"10,8",385,"4,2",293,"122.358,00"
+porsche,911 Carrera Cabriolet,1297,1852,2024,4519,1575,2981,"10,8",385,"4,4",291,"138.648,00"
+porsche,911 Carrera 4,1298,1852,2024,4519,1555,2981,"10,9",385,"4,2",291,"131.318,00"
+porsche,911 Carrera 4 Cabriolet,1297,1852,2024,4519,1625,2981,"10,8",385,"4,4",289,"147.608,00"
+porsche,911 Carrera S,1300,1852,2024,4519,1515,2981,"11,1",450,"3,7",308,"140.006,00"
+porsche,911 Carrera S Cabriolet,1299,1852,2024,4519,1585,2981,"11,0",450,"3,9",306,"156.296,00"
+porsche,911 Carrera 4S,1300,1852,2024,4519,1565,2981,"11,1",450,"3,6",306,"148.965,00"
+porsche,911 Carrera 4S Cabriolet,1299,1852,2024,4519,1635,2981,"11,1",450,"3,8",304,"165.255,00"
+porsche,911 Turbo S,1303,1900,2024,4535,NA,3745,"12,3",650,"2,7",330,"249.963,00"
+porsche,911 Turbo S Cabriolet,1303,1900,2024,4535,NA,3745,"12,3",650,"2,7",330,"265.439,00"
+porsche,Taycan 4S,1379,1966,2144,4963,NA,NA,"25,7",435,"2,8",250,"108.337,00"
+porsche,Taycan Turbo,1379,1966,2144,4963,NA,NA,"25,7",435,"2,8",250,"155.648,00"
+porsche,Taycan Turbo S,1379,1966,2144,4963,NA,NA,"25,7",435,"2,8",250,"189.528,00"
+porsche,Panamera 4,1423,1937,2165,5049,1865,2894,"11,3",330,"5,5",262,"108.794,00"
+porsche,Panamera 4 10 Years Edition,1423,1937,2165,5049,1865,2894,"11,3",330,"5,5",262,"127.230,00"
+porsche,Panamera 4 Sport Turismo,1428,1937,2165,5049,1910,2894,"11,5",330,"5,5",259,"116.212,00"
+porsche,Panamera 4 Sport Turismo 10 Years Edition,1428,1937,2165,5049,1910,2894,"11,5",330,"5,5",259,"134.810,00"
+porsche,Panamera 4 Executive,1428,1937,2165,5199,1975,2894,"11,3",330,"5,6",262,"119.385,00"
+porsche,Panamera 4S,1423,1937,2165,5049,1870,2894,"11,8",440,"4,4",289,"131.283,00"
+porsche,Panamera 4S Sport Turismo,1428,1937,2165,5049,1915,2894,"11,9",440,"4,4",286,"136.513,00"
+porsche,Panamera 4S Executive,1428,1937,2165,5199,1980,2894,"11,8",440,"4,5",289,"146.450,00"
+porsche,Panamera GTS,1417,1937,2165,5053,1995,3996,"12,7",460,"4,1",292,"161.688,00"
+porsche,Panamera GTS Sport Turismo,1422,1937,2165,5053,2025,3996,"12,7",460,"4,1",289,"164.946,00"
+porsche,Panamera Turbo,1427,1937,2165,5049,1995,3996,"12,7",550,"3,8",306,"183.951,00"
+porsche,Panamera Turbo Sport Turismo,1432,1937,2165,5049,2035,3996,"12,7",550,"3,8",304,"187.209,00"
+porsche,Panamera Turbo Executive,1432,1937,2165,5199,2100,3996,"12,7",550,"3,9",306,"199.291,00"
+porsche,Panamera 4 E-Hybrid,1423,1937,2165,5049,2170,2894,"3,6",462,"4,6",278,"116.411,00"
+porsche,Panamera 4 E-Hybrid 10 Years Edition,1423,1937,2165,5049,2170,2894,"3,6",462,"4,6",278,"131.294,00"
+porsche,Panamera 4 E-Hybrid Sport Turismo,1428,1937,2165,5049,2190,2894,"3,7",462,"4,6",275,"119.315,00"
+porsche,Panamera 4 E-Hybrid Sport Turismo 10 Years Edition,1428,1937,2165,5049,2190,2894,"3,7",462,"4,6",275,"133.593,00"
+porsche,Panamera 4 E-Hybrid Executive,1428,1937,2165,5199,2250,2894,"3,6",462,"4,7",278,"124.034,00"
+porsche,Panamera Turbo S E-Hybrid,1427,1937,2165,5049,2310,3996,"3,8",680,"3,4",310,"194.819,00"
+porsche,Panamera Turbo S E-Hybrid Sport Turismo,1432,1937,2165,5049,2325,3996,"3,9",680,"3,4",310,"197.723,00"
+porsche,Panamera Turbo S E-Hybrid Executive,1432,1937,2165,5199,2410,3996,"3,8",680,"3,5",310,"208.492,00"
+porsche,Macan,205,1923,2098,4696,1795,1984,"11,0",245,"6,7",225,"67.152,00"
+porsche,Macan S,205,1923,2098,4696,1865,2995,"11,8",354,"5,3",254,"76.100,00"
+porsche,Macan GTS,190,1926,2098,4686,1910,2894,"11,8",380,"4,9",261,"90.354,00"
+porsche,Macan Turbo,205,1926,2098,4684,1945,2894,"12,0",440,"4,5",270,"106.372,00"
+porsche,Cayenne,210,1983,2194,4918,1985,2995,"12,7",340,"6,2",245,"89.208,00"
+porsche,Cayenne E-Hybrid,210,1983,2194,4918,2295,2995,"4,7",462,"5,0",253,"94.761,00"
+porsche,Cayenne S,210,1983,2194,4918,2020,2894,"12,9",440,"5,2",265,"109.163,00"
+porsche,Cayenne Turbo,190,1983,2194,4926,2175,3996,"14,0",550,"4,1",286,"163.328,00"
+porsche,Cayenne Turbo S E-Hybrid,190,1983,2194,4926,2490,3996,"5,4",680,"3,8",295,"177.041,00"
+porsche,Cayenne Coupé,210,1983,2194,4931,2030,2995,"12,7",340,"6,0",243,"97.217,00"
+porsche,Cayenne E-Hybrid Coupé,210,1983,2194,4931,2360,2995,"4,7",462,"5,1",253,"99.117,00"
+porsche,Cayenne S Coupé,210,1983,2194,4931,2050,2894,"12,9",440,"5,0",263,"115.408,00"
+porsche,Cayenne Turbo Coupé,190,1989,2194,4939,2200,3996,"14,0",550,"3,9",286,"169.029,00"
+porsche,Cayenne Turbo S E-Hybrid Coupé,190,1989,2194,4939,2535,3996,"5,4",680,"3,8",295,"180.792,00"

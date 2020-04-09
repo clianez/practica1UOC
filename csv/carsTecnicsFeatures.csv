@@ -1,18 +1,18 @@
 marca,modelo,altura,anchoBase,anchoTotal,longitud,peso,cilindrada,consumo,potencia,aceleracion,velocidadMax,precio
-Lamborghini,AVENTADOR S,1.136 mm (44.72 in),2.030 mm (79.92 in),2.265 mm (89.17 in),4.797 mm (188.86 in),"1.575 kg (3,472 lb)",6.498 cm³ (396.5 cu in),"18,4 l/100km",6,"2,9 s",350 km/h (217 mph),NA
-Lamborghini,AVENTADOR S ROADSTER,1.136 mm (44.72 in),2.030 mm (79.92 in),2.265 mm (89.17 in),4.797 mm (188.86 in),"1.625 kg (3,583 lb)",6.498 cm³ (396.5 cu in),"18,4 l/100km",5,"3,0 s",350 km/h (217 mph),NA
-Lamborghini,AVENTADOR SVJ,1136 mm,2098 mm,2273 mm,4943 mm,1525 kg (3362 lb),6498 cc,"17,9 l/100km",0,"2,8 s",&gt;350 km/h,NA
-Lamborghini,AVENTADOR SVJ ROADSTER,"1,136 mm (44.72 in)","2,098 mm (82.60 in)","2,273 mm (89.49 in)","4,943 mm (194.61 in)","1,575 kg","6,498 cm³","17,9 l/100km", ,2.9 s,&gt;350 km/h,NA
-Lamborghini,Huracán EVO,"mm 1,165 (in 45,86)","mm 1,933 (in 76,10)","mm 2,236 (in 88,03)","mm 4,52 (in 177,9)",kg 1.422 (lb 3.134),5.204 cm3 (317.57 cu in),"13,7, l/100km",C,2.9 s,km/h &gt;325 (mph &gt; 202),NA
-Lamborghini,HURACÁN EVO SPYDER,"1,180 mm (46.46 in)","1,933 mm (76.10 in)","2,236 mm (88.03 in)","4,520 mm (177.95 in)","1,668 mm (65.67 in)","5204 cm³ (317,6 pulgadas cúbicas)",14.2 l/100 km,V,3.1 s,325 km/h (202 mph),NA
-Lamborghini,Huracán EVO RWD,"1,165 mm (45.86 in)","1,933 mm (76.10 in)","2,236 mm (88.03 in)","4,520 mm (177.9 in)",1389 kg,"5,204 cm³ (317.57 cu in)","13,8 l/100 km", ,3.3 s,325 km/h,NA
-Lamborghini,Sián FKP 37,NA,NA,NA,NA,NA,"6.498 cm³ (396,5 pulgadas cúbicas)",NA,(,NA,819 CV,NA
-Lamborghini,Centenario Roadster,NA,NA,NA,NA,NA,6.498 cm³ (396.5 cu in),NA,4,"2,9 s",&gt; 350 km/h (&gt; 217 mph),NA
-Lamborghini,Centenario,NA,NA,NA,NA,NA,6.498 cm³ (396.5 cu in),NA,7,"2,8 s",&gt; 350 km/h (&gt; 217 mph),NA
-Lamborghini,Terzo Millennio,NA,NA,NA,NA,NA,NA,NA,8,NA,NA,NA
-Lamborghini,Asterion,NA,NA,NA,NA,NA,"5.204 cm³ (317,6 cu.in.) - motor de combustión interna","4,1 l/100 km", ,NA,NA,NA
-Lamborghini,Estoque,NA,NA,NA,NA,NA,NA,NA,k,NA,NA,NA
-Lamborghini,URUS,NA,NA,NA,NA,NA,"3,996 cm3 (243.85 cu in)",NA,W,3.6 s,305 km/h ,NA
+Lamborghini,AVENTADOR S,1.136 mm (44.72 in),2.030 mm (79.92 in),2.265 mm (89.17 in),4.797 mm (188.86 in),"1.575 kg (3,472 lb)",6.498 cm³ (396.5 cu in),"18,4 l/100km",740 CV (544 kW) @ 8.400 rpm,"2,9 s",350 km/h (217 mph),NA
+Lamborghini,AVENTADOR S ROADSTER,1.136 mm (44.72 in),2.030 mm (79.92 in),2.265 mm (89.17 in),4.797 mm (188.86 in),"1.625 kg (3,583 lb)",6.498 cm³ (396.5 cu in),"18,4 l/100km",740 CV (544 kW) @ 8.400 rpm,"3,0 s",350 km/h (217 mph),NA
+Lamborghini,AVENTADOR SVJ,1136 mm,2098 mm,2273 mm,4943 mm,1525 kg (3362 lb),6498 cc,"17,9 l/100km",566 kW (770 CV) at 8.500 rpm,"2,8 s",&gt;350 km/h,NA
+Lamborghini,AVENTADOR SVJ ROADSTER,"1,136 mm (44.72 in)","2,098 mm (82.60 in)","2,273 mm (89.49 in)","4,943 mm (194.61 in)","1,575 kg","6,498 cm³","17,9 l/100km","770 CV (566 kW) @ 8,500 rpm",2.9 s,&gt;350 km/h,NA
+Lamborghini,Huracán EVO,"mm 1,165 (in 45,86)","mm 1,933 (in 76,10)","mm 2,236 (in 88,03)","mm 4,52 (in 177,9)",kg 1.422 (lb 3.134),5.204 cm3 (317.57 cu in),"13,7, l/100km",640 CV (470 kW) @ 8.000 rpm,2.9 s,km/h &gt;325 (mph &gt; 202),NA
+Lamborghini,HURACÁN EVO SPYDER,"1,180 mm (46.46 in)","1,933 mm (76.10 in)","2,236 mm (88.03 in)","4,520 mm (177.95 in)","1,668 mm (65.67 in)","5204 cm³ (317,6 pulgadas cúbicas)",14.2 l/100 km,640 CV (470 kW) @ 8.000 rpm,3.1 s,325 km/h (202 mph),NA
+Lamborghini,Huracán EVO RWD,"1,165 mm (45.86 in)","1,933 mm (76.10 in)","2,236 mm (88.03 in)","4,520 mm (177.9 in)",1389 kg,"5,204 cm³ (317.57 cu in)","13,8 l/100 km","610 CV (449 kW) @ 8,000 rpm",3.3 s,325 km/h,NA
+Lamborghini,Sián FKP 37,NA,NA,NA,NA,NA,"6.498 cm³ (396,5 pulgadas cúbicas)",NA,785 CV (577 kW) @ 8.500 RPM,NA,819 CV,NA
+Lamborghini,Centenario Roadster,NA,NA,NA,NA,NA,6.498 cm³ (396.5 cu in),NA,770 CV (566 kW) @ 8.500 rpm,"2,9 s",&gt; 350 km/h (&gt; 217 mph),NA
+Lamborghini,Centenario,NA,NA,NA,NA,NA,6.498 cm³ (396.5 cu in),NA,770 CV (566 kW) @ 8.500 rpm,"2,8 s",&gt; 350 km/h (&gt; 217 mph),NA
+Lamborghini,Terzo Millennio,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lamborghini,Asterion,NA,NA,NA,NA,NA,"5.204 cm³ (317,6 cu.in.) - motor de combustión interna","4,1 l/100 km",910 CV (669 kW),NA,NA,NA
+Lamborghini,Estoque,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Lamborghini,URUS,NA,NA,NA,NA,NA,"3,996 cm3 (243.85 cu in)",NA,"650 CV (478 kW) @ 6,000 rpm",3.6 s,305 km/h ,NA
 porsche,718 Cayman,1295,1801,1994,4379,1335,1988,"9,0",300,"5,3",275,"62.103,00"
 porsche,718 Cayman S,1295,1801,1994,4379,1355,2497,"9,7",350,"4,9",285,"78.698,00"
 porsche,718 Boxster,1281,1801,1994,4379,1335,1988,"9,0",300,"5,3",275,"64.326,00"

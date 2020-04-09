@@ -6,6 +6,7 @@ from selenium.common.exceptions import NoSuchElementException, ElementClickInter
 from itertools import chain
 import re
 import time
+import urllib.robotparser
 
 
 def filter_price(price_string):
@@ -16,7 +17,7 @@ def filter_price(price_string):
     return price_text
 
 
-def get_acelerations():
+def get_acelerations(driver, acelerations):
     # Buscamos las aceleraciones en caso de encontrarlas las agregamos al vector de aceleraciones
     # sino las encontramos agregamos un NA
     try:
@@ -26,12 +27,14 @@ def get_acelerations():
         # Eliminamos las unidades
         acel = acel_node.get_attribute('innerHTML').replace(' s', '')
         acelerations.insert(len(acelerations), acel)
+        return acelerations
     except NoSuchElementException:
         acelerations.insert(len(acelerations), 'NA')
+        return acelerations
         pass
 
 
-def get_max_speeds():
+def get_max_speeds(driver, max_speeds):
     try:
         # Obtenemos la velocidad máxima buscando el elemento Velocidad máxima
         # que tenga como nodo tio algo que ponga km/h
@@ -40,6 +43,7 @@ def get_max_speeds():
         # Limpiamos las unidades
         spd = spd_node.get_attribute('innerHTML').replace(' km/h', '')
         max_speeds.insert(len(max_speeds), spd)
+        return max_speeds
     except NoSuchElementException:
         try:
             # Sin no lo encuentra, lo intenamos de otra manera.
@@ -60,12 +64,14 @@ def get_max_speeds():
             # Limpiamos las unidades
             spd = spd_node.get_attribute('innerHTML').replace(' km/h', '')
             max_speeds.insert(len(max_speeds), spd)
+            return max_speeds
         except NoSuchElementException:
             max_speeds.insert(len(max_speeds), 'NA')
+            return max_speeds
             pass
 
 
-def get_powers():
+def get_powers(driver, powers):
     pwr = ''
 
     try:
@@ -98,9 +104,10 @@ def get_powers():
         # Si la expresión recgular no es capaz de encontrar el valor agregamos un NA sino agregamos el valor
         pwr = 'NA' if pwr_filter is None else pwr_filter.group(1)
     powers.insert(len(powers), pwr)
+    return powers
 
 
-def get_dimensions(text, dimArray, url):
+def get_dimensions(driver, text, dimArray, url):
     # Iniciailzamos el valor a vacio
     value = ''
 
@@ -152,9 +159,10 @@ def get_dimensions(text, dimArray, url):
         value = node.get_attribute(
             'innerHTML').replace(text + ': ', '').replace('.', '').replace(' mm', '')
     dimArray.insert(len(dimArray), value)
+    return dimArray
 
 
-def get_weights(url):
+def get_weights(driver, url, weights):
     wghts = ''
 
     # Cargamos la página principal del subtipo
@@ -205,9 +213,10 @@ def get_weights(url):
         wghts = wghts_nodes.get_attribute(
             'innerHTML').replace('.', '').replace(' kg', '')
     weights.insert(len(weights), wghts)
+    return weights
 
 
-def get_consumptions(url):
+def get_consumptions(driver, url, consumptions):
     cnsmp = ''
 
     # Cargamos la página principal del subtipo
@@ -225,9 +234,10 @@ def get_consumptions(url):
         # Cogemos el primer elemento para eliminar las unidades
         cnsmp = cnsmp_nodes.get_attribute('innerHTML').split(' ')[0]
     consumptions.insert(len(consumptions), cnsmp)
+    return consumptions
 
 
-def get_cylinder(url):
+def get_cylinder(driver, url, cylinders):
     clndr = ''
 
     # Cargamos la página principal del subtipo
@@ -267,9 +277,10 @@ def get_cylinder(url):
         clndr = clndr_nodes.get_attribute(
             'innerHTML').replace('.', '').replace(' cm³', '')
     cylinders.insert(len(cylinders), clndr)
+    return cylinders
 
 
-def get_models_nodes_flatten():
+def get_models_nodes_flatten(driver):
     # Obtenemos los nodos de cada uno de los subtipos de coches
     # Buscamos primero el nodo del tipo de coche
     branch_nodes = driver.find_elements_by_xpath('//h3/a')
@@ -303,9 +314,19 @@ def get_urls(models_nodes_flatten):
 def scrappingPorsche():
     base_url = 'https://www.porsche.com'
 
+    # Leemos el robots.txt para verificar que se puede acceder a las urls
+    rp = urllib.robotparser.RobotFileParser()
+    rp.set_url(base_url + '/robots.txt')
+    rp.read()
+
     driver = webdriver.Chrome()
-    # Cargamos la página en español
-    driver.get(base_url + '/spain')
+    # Cargamos la página en español en caso de que esté permitida por el robots
+
+    if rp.can_fetch("*", base_url + '/spain'):
+        driver.get(base_url + '/spain')
+    else:
+        exit()
+
     # Obtenemos el enlace de los modelos
     menu_models = driver.find_element_by_id('m-01-models-menu-button')
     # Picamos en él
@@ -313,7 +334,7 @@ def scrappingPorsche():
     # Obtenemos todos los modelos. Flatten es porque hay tipos de coches y subtipos.
     # Por ejemplo el 911 tiene 911 carrera y 911 turbo, así que obtenemos los nodos de
     # los subtipos
-    models_nodes_flatten = get_models_nodes_flatten()
+    models_nodes_flatten = get_models_nodes_flatten(driver)
     # Rellenamos un vector con el nombre del fabricante
     manufacturer = ['porsche']*len(models_nodes_flatten)
     # Obtenemos los modelos a partir de los nodos de los modelos
@@ -336,29 +357,31 @@ def scrappingPorsche():
 
     # Iteramos por todas las urls
     for x in urls:
-        driver.get(base_url + x)
-        print(base_url + x)
-        # Añadimos la aceleración del modelo actual
-        get_acelerations()
-        # La velocidad máxima
-        get_max_speeds()
-        # La potencia
-        get_powers()
-        # La altura
-        get_dimensions('Altura', heights, base_url + x)
-        # La longitud
-        get_dimensions('Longitud', lengths, base_url + x)
-        # La anchura
-        get_dimensions('Anchura (con retrovisores abatidos)',
-                       widthsB, base_url + x)
-        get_dimensions('Anchura (con retrovisores extendidos)',
-                       widthsT, base_url + x)
-        # El peso
-        get_weights(base_url + x)
-        # El consumo
-        get_consumptions(base_url + x)
-        # La cilindrada
-        get_cylinder(base_url + x)
+
+        if rp.can_fetch("*", base_url + x):
+            driver.get(base_url + x)
+            print(base_url + x)
+            # Añadimos la aceleración del modelo actual
+            acelerations = get_acelerations(driver, acelerations)
+            # La velocidad máxima
+            max_speeds = get_max_speeds(driver, max_speeds)
+            # La potencia
+            powers = get_powers(driver, powers)
+            # La altura
+            heights = get_dimensions(driver, 'Altura', heights, base_url + x)
+            # La longitud
+            lengths = get_dimensions(driver, 'Longitud', lengths, base_url + x)
+            # La anchura
+            widthsB = get_dimensions(driver, 'Anchura (con retrovisores abatidos)',
+                                     widthsB, base_url + x)
+            widthsT = get_dimensions(driver, 'Anchura (con retrovisores extendidos)',
+                                     widthsT, base_url + x)
+            # El peso
+            weigths = get_weights(driver, base_url + x, weights)
+            # El consumo
+            consumptions = get_consumptions(driver, base_url + x, consumptions)
+            # La cilindrada
+            cylinders = get_cylinder(driver, base_url + x, cylinders)
 
     driver.close()
 

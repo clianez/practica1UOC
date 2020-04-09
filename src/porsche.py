@@ -311,7 +311,7 @@ def get_urls(models_nodes_flatten):
         './..').get_attribute('href'), models_nodes_flatten))
 
 
-def scrappingPorsche():
+def scrapingPorsche():
     base_url = 'https://www.porsche.com'
 
     # Leemos el robots.txt para verificar que se puede acceder a las urls
